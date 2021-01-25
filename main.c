@@ -1,6 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void View(int x[], int y[], int n){
+    int i,j=1;
+    printf("\nTabel Stok APD\n");
+    printf("+==============================+\n");
+    printf("| No | Storage Kode | Stok APD |\n");
+    printf("+==============================+\n");
+    for(i=0; i<n; i++){
+        printf("| %i  |\t     %i      |\t %i   |\n", j, x[i], y[i]);
+        j++;
+    }
+    printf("+==============================+\n");
+}
+
 int masuk(int x){
     int y;
     printf("Masukkan jumlah yang ditambahkan : ");
@@ -21,19 +34,6 @@ int keluar(int x){
     }
     printf("Jumlah sekarang = %i\n\n", x);
     return x;
-}
-
-void View(int x[], int y[], int n){
-    int i,j=1;
-    printf("\nTabel Stok APD\n");
-    printf("+==============================+\n");
-    printf("| No | Storage Kode | Stok APD |\n");
-    printf("+==============================+\n");
-    for(i=0; i<n; i++){
-        printf("| %i  |\t     %i      |\t %i   |\n", j, x[i], y[i]);
-        j++;
-    }
-    printf("+==============================+\n");
 }
 
 void SortAsc(int x[], int y[], int n){
@@ -86,22 +86,47 @@ void SortDesc(int x[], int y[], int n){
     printf("+==============================+\n");
 }
 
+void Min(int x[], int y[], int n){
+    int min=0, i, j;
+    for(i=1;i<n;i++){
+        if(y[i] <= y[min]){
+            min = i;
+        }
+    }
+    printf("\nStorage dengan Stok APD terendah adalah\n");
+    printf("Storage %i dengan stok %i\n", x[min],y[min]);
+}
+
+void Max(int x[], int y[], int n){
+    int max=0, i, j;
+    for(i=1;i<n;i++){
+        if(y[i] >= y[max]){
+            max = i;
+        }
+    }
+    printf("\nStorage dengan Stok APD terbanyak adalah\n");
+    printf("Storage %i dengan stok %i\n", x[max],y[max]);
+}
+
 int main()
 {
     int pilih, kode, length;
     int kode_apd[4] = {1,2,3,4};
     int stok_apd[4] = {129,125,122,130};
+    char cpilih;
     length = sizeof(kode_apd) / sizeof(*kode_apd);
     Awal: //untuk mengembalikkan ke awal program
-    printf("===========================\n");
-    printf("    Program Tugas Besar\n");
-    printf("    Program  APD  Storage\n");
-    printf("===========================\n\n");
-    printf("Silahkan pilih menu yang diinginkan\n");
+    printf("+==========================+\n");
+    printf("|   Program Tugas Besar    |\n");
+    printf("|   Program  APD  Storage  |\n");
+    printf("+==========================+\n\n");
+    printf("Pilih Menu :\n");
     printf("1. Tampilkan Stok APD\n");
     printf("2. Input APD Masuk\n");
     printf("3. Input APD Keluar\n");
-    printf("4. Urutkan Stok APD\n\n");
+    printf("4. Urutkan Stok APD\n");
+    printf("5. Cari Storage dengan Stok APD terendah\n");
+    printf("6. Cari Storage dengan Stok APD terbanyak\n\n");
     printf("Masukkan pilihan : ");
     scanf("%i", &pilih);
     if(pilih == 1){
@@ -122,6 +147,7 @@ int main()
             printf("Kode Salah!\n\n");
             goto Ulang2;
         }
+
     }else if(pilih == 3){
         Ulang3:
         printf("Masukkan kode APD : ");
@@ -152,9 +178,23 @@ int main()
             printf("Pilihan tidak ada!\n\n");
             goto Ulang4;
         }
+    }else if(pilih == 5){
+        Min(kode_apd,stok_apd,length);
+    }else if(pilih == 6){
+        Max(kode_apd,stok_apd,length);
     }else{
         printf("Pilihan tidak ada!\n\n");
         goto Awal;
+    }
+    printf("\nKembali ke menu awal? (y/n) : ");
+    cpilih = getche();
+    if(cpilih == 'y'){
+        printf("\n");
+        system("pause");
+        system("cls");
+        goto Awal;
+    }else{
+        exit(0);
     }
     return 0;
 }
