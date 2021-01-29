@@ -2,7 +2,19 @@
 #include <stdlib.h>
 
 void View(int x[], int y[], int n){
-    int i,j=1;
+    int i, j=1, pass, temp1, temp2;
+    for(pass=1;pass<n;pass++){
+        for(i=0;i<n-pass;i++){
+            if(x[i] > x[i+1]){
+                temp1 = x[i];
+                temp2 = y[i];
+                x[i] = x[i+1];
+                y[i] = y[i+1];
+                x[i+1] = temp1;
+                y[i+1] = temp2;
+            }
+        }
+    }
     printf("\nTabel Stok APD\n");
     printf("+==============================+\n");
     printf("| No | Storage Kode | Stok APD |\n");
@@ -147,7 +159,6 @@ int main()
             printf("Kode Salah!\n\n");
             goto Ulang2;
         }
-
     }else if(pilih == 3){
         Ulang3:
         printf("Masukkan kode APD : ");
