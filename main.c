@@ -27,11 +27,16 @@ void View(int x[], int y[], int n){
 }
 
 int masuk(int x){
-    int y;
+    int y,full=500;
     printf("Masukkan jumlah yang ditambahkan : ");
     scanf("%i", &y);
     x = x + y;
-    printf("Jumlah sekarang = %i\n\n", x);
+    if(x>=full){
+        x = x - y;
+        printf("\nGudang sudah penuh!\n");
+    }else{
+        printf("Jumlah sekarang = %i\n\n", x);
+    }
     return x;
 }
 
